@@ -1,0 +1,122 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{boldline}
+\usepackage{amssymb, amsmath}
+\usepackage{amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{upgreek}
+
+% Meta
+\title{Entrega 1}
+\author{José Antonio Álvarez}
+\date{}
+
+% Custom
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\setlength\parindent{0pt}
+% Redefinir letra griega épsilon.
+\let\epsilon\upvarepsilon
+% Fracciones grandes
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+% Primera derivada parcial: \pder[f]{x}
+\newcommand{\pder}[2][]{\frac{\partial#1}{\partial#2}}
+
+\begin{document}
+
+\maketitle
+
+\large{\textbf{13. - Dados dos homomorfismos $\boldsymbol{ f : A  \rightarrow B  , g : A  \rightarrow B}$ , se dice que son iguales si}
+\textbf{f(x) = g(x), $\boldsymbol{\forall x \in A}$. Existe un procedimiento algoritmico para comprobar si dos homomorfismos son iguales?} \\
+
+Expresando $x = a_1...a_n$ con $a_i \in A, \forall i \in \{1,...,n\}$:
+
+$f(x) = g(x) \leftrightarrow f(a_1...a_n) = g(a_1...a_n) \leftrightarrow f(a_1)...f(a_n) = g(a_1)...g(a_n) \leftrightarrow f(a_i) = g(a_i) \forall i \in \{1,...,n\}.$ 
+
+Es decir, a nivel algorítmico basta con verificar que $f(a) = g(a), \forall a \in A.$ Para saber si los los homomorfismos son iguales. Cabe destacar que A es finito, por lo que este algoritmo siempre es implementable.\\
+
+\large{\textbf{16. - Dada la gramática $\boldsymbol{ G = (\{S, A\}, \{a, b\}, P, S)}$ donde $\boldsymbol{ P = \{S \rightarrow abAS,}$} \\ \textbf{$\boldsymbol{abA \rightarrow baab, S \rightarrow a, A \rightarrow b\}.}$ Determinar el lenguaje que genera.}} \\
+
+El lenguaje generado es el siguiente: \\
+$L(G) = \{ u_1...u_na : u_i \in \{abb, baab\}, \forall i \in \{1,...,n\}, n \geq 1\}$ \\
+
+\large{\textbf{17. - Sea la gramática $\boldsymbol{ G = (V, T, P, S)}$ donde:
+\begin{itemize}
+	\item V = \{\textless numero\textgreater, \textless digito\textgreater \}
+	\item T = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}
+	\item S = \textless numero\textgreater
+	\item Las reglas de producción P son:
+	\begin{itemize}
+		\item \textless numero\textgreater $\boldsymbol\rightarrow$ \textless numero\textgreater\textless digito\textgreater
+		\item \textless numero\textgreater $\boldsymbol\rightarrow$ \textless digito\textgreater
+		\item \textless digito\textgreater $\boldsymbol{\rightarrow 0|1|2|3|4|5|6|7|8|9}$
+	\end{itemize}
+\end{itemize}
+Determinar el lenguaje que genera. }} \\
+
+El lenguaje generado por esta gramática es el siguiente: \\
+$L(G) =\{ n_1,...,n_m : n_i \in \{0,...,9\}, \forall i \in \{1,...,m\}, m \geq 1\}$ \\
+
+\large{\textbf{18. - Sea la gramática $\boldsymbol{G = ({A, S}, {a, b}, S, P )}$ donde las reglas de producción son:
+\begin{itemize}
+	\item S $\rightarrow$ aS
+	\item S $\rightarrow$ aA
+	\item A $\rightarrow$ bA
+	\item A $\rightarrow$ b
+\end{itemize}
+Determinar el lenguaje generado por la gramática }} \\
+
+El lenguaje generado por esta gramática es el siguiente: \\
+$L(G) = \{a^ib^j: i,j \geq 1\}$ \\
+
+\large{\textbf{19. - Encontrar si es posible una gramática lineal por la derecha o una gramática libre del contexto que genere el lenguaje L supuesto que $\boldsymbol{ L \subset \{a, b, c\}*}$ y verifica: \\
+\begin{enumerate}
+	\item $\boldsymbol{u \in L}$ si y solamente si verifica que u no contiene dos simbolos b consecutivos.
+	\item $\boldsymbol{u \in L}$ si y solamente si verifica que u contiene dos simbolos b consecutivos.
+	\item $\boldsymbol{u \in L}$ si y solamente si verifica que contiene un número impar de simbolos c.
+	\item $\boldsymbol{u \in L}$ si y solamente si verifica que no contiene el mismo número de simbolos b que de simbolos c. 
+\end{enumerate} }}
+
+1. La gramática $G_1$ libre del contexto que genera dicho lenguaje será $G_1 = (\{S, X\}, \{a, b, c\}, P, S)$, donde las reglas de producción P son las siguientes: 
+\begin{itemize}
+	\item S $\rightarrow$ aS$|$bX$|$cS$|\epsilon$
+	\item X $\rightarrow$ aS$|$cS$|\epsilon$ \\
+\end{itemize} 
+
+
+2. La gramática $G_2$ libre del contexto que genera dicho lenguaje será $G_2 = (\{S, X, Y\}, \{a, b, c\}, P, S)$, donde las reglas de producción P son las siguientes: 
+\begin{itemize}
+	\item S $\rightarrow$ aS$|$bX$|$cS
+	\item X $\rightarrow$ aS$|$bY$|$cS
+	\item Y $\rightarrow$ aY$|$bY$|$cY$|\epsilon$ \\
+\end{itemize} 
+
+
+
+3. La gramática $G_3$ libre del contexto que genera dicho lenguaje será $G_3 = (\{S, X\}, \{a, b, c\}, P, S)$, donde las reglas de producción P son las siguientes: \\
+\begin{itemize}
+	\item S $\rightarrow$ aS$|$bS$|$cX
+	\item X $\rightarrow$ aX$|$bX$|$cS$|\epsilon$ \\
+\end{itemize} 
+
+
+
+4. La gramática $G_4$ libre del contexto que genera dicho lenguaje será $G_4 = (\{S, S_1, S_2, X, B, C\}, \{a, b, c\}, P, S)$, donde las reglas de producción P son las siguientes: 
+\begin{itemize}
+	\item S $\rightarrow$ $S_1|S_2$
+	\item $S_1 \rightarrow$ B$|$BS
+	\item $S_2 \rightarrow$ C$|$CS
+	\item B $\rightarrow$ aB$|$bX$|$cBB
+	\item C $\rightarrow$ aC$|$bCC$|$cX
+	\item X $\rightarrow$ aX$|$bC$|$cB$|\epsilon$
+\end{itemize}
+
+\end{document}
