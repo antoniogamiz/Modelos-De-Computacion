@@ -1,0 +1,31 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{automata,positioning}
+\begin{document}
+
+\begin{tikzpicture}[>=stealth,node distance=3cm,on grid,auto, thick, initial text=] 
+  \node[state,initial] (q_0)   {$q_0$}; 
+  \node[state]         (q_1) [right=3cm of q_0] {$q_1$};
+  \node[state]         (q_2) [right= of q_1] {$q_2$};
+  \node[state,accepting]         (q_3) [right=of q_2] {$q_3$};
+  \node[state]         (q_4) [below=of q_2] {$q_4$};
+  \node[state]         (q_5) [right=of q_4] {$q_5$};
+  \node[state,accepting]         (q_6) [left=of q_4] {$q_6$};
+  \node[state]         (q_7) [left=of q_6] {$\o$};
+
+  \path[->]            (q_0) edge [bend left] node {0} (q_1)
+                             edge [left] node[left] {1} (q_7)
+                       (q_1) edge [bend left] node {0} (q_0)
+                             edge [right] node[above] {1} (q_2)
+                       (q_2) edge [left] node[above] {1} (q_3)
+                             edge [left] node [above]  {0} (q_7)
+                       (q_3) edge [loop above] node[above] {1} (q_5)
+                             edge [left] node {0} (q_4)
+                       (q_4) edge [right] node[above] {0} (q_5)
+                             edge [bend left] node [above] {1} (q_7)
+                       (q_5) edge [bend left] node [above] {0} (q_6)
+                             edge [bend left] node {1} (q_7)
+                       (q_6) edge [left] node [above] {0} (q_4)
+                             edge [left] node [above] {1} (q_7)
+                       (q_7) edge [loop left] node {0,1} (q_4);
+\end{tikzpicture}
+\end{document}
