@@ -1,0 +1,212 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{boldline}
+\usepackage{amssymb, amsmath,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{upgreek}
+\usepackage{float}
+
+% Meta
+\title{Entrega 3}
+\author{José Antonio Álvarez}
+\date{\today}
+
+% Custom
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\setlength\parindent{0pt}
+% Redefinir letra griega épsilon.
+\let\epsilon\upvarepsilon
+% Fracciones grandes
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+% Primera derivada parcial: \pder[f]{x}
+\newcommand{\pder}[2][]{\frac{\partial#1}{\partial#2}}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Ejercicio 14.} Dar gramáticas independientes del contexto que generen los siguientes lenguajes sobre el alfabeto $A = \{0, 1\}$: 
+
+\begin {enumerate} 
+
+\item $L_1$: conjunto de palabras tal que si la palabra empieza por 0 , entonces tiene el mismo número de 0s que de 1s:
+	
+$$ S \rightarrow 0A_0 | 1D $$
+$$ D \rightarrow BD | \epsilon $$
+$$ B \rightarrow 0 | 1 $$
+$$ A_0 \rightarrow 0 A_x | 1 A_0 A_0 $$
+$$ A_1 \rightarrow 1 A_x | 0 A_1 A_1 $$
+$$ A_x \rightarrow 1 A_0 | 0 A_1 | \epsilon $$
+
+\item $L_2$: conjunto de palabras tal que si la palabra termina por 1 , entonces tiene un número de 1s mayor o igual que el número de 0s:
+
+$$ S \rightarrow D0 | C1 $$
+$$ D \rightarrow BD | \epsilon $$
+$$ B \rightarrow 0 | 1 $$
+$$ C \rightarrow \epsilon | 0 | C1C $$
+
+
+\item $L_1 \cap L_2$:
+
+Analicemos el problema antes de proceder a la gramática. Sean $n_0$ y $n_1$ el número de ceros y de unos de la palabra $u$ respectivamente. En la siguiente tabla podemos apreciar las restricciones que tendrán que cumplir $n_0$ y $n_1$ dependiendo de si $u$ empieza/acaba por 0/1 ($v,w \in \{0,1 \}^*$):
+
+\begin{table}[h]
+\centering
+\caption{Restricciones para $u$}
+\label{my-label}
+\begin{tabular}{l|l|l|}
+\cline{2-3}
+\textbf{}                      & $u = w0$          & $u = w1$         \\ \hline
+\multicolumn{1}{|l|}{$u = 0v$} & $n_0 = n_1$ (1)   & $n_0 = n_1$ (2)  \\ \hline
+\multicolumn{1}{|l|}{$u = 1v$} & $u \in \{0,1\}^*$ (3) & $n_0 <= n_1$ (4) \\ \hline
+\end{tabular}
+\end{table}
+
+Distinción de casos:
+$$ S \rightarrow 0A_0 | 1E $$
+$$ E \rightarrow CC1 | D0 $$
+
+Casos (1) y (2):
+$$ A_0 \rightarrow 0 A_x | 1 A_0 A_0 $$
+$$ A_1 \rightarrow 1 A_x | 0 A_1 A_1 $$
+$$ A_x \rightarrow 1 A_0 | 0 A_1 | \epsilon $$
+
+Caso (3):
+$$ D \rightarrow BD | \epsilon $$
+$$ B \rightarrow 0 | 1 $$
+
+Caso (4):
+$$ C \rightarrow \epsilon | 0 | C1C $$ \\
+
+\end{enumerate}
+
+\textbf{Ejercicio 16.} Una gramática independiente del contexto generalizada es una gramática en el que las producciones son de la forma $A \rightarrow r$ donde $r$ es una expresión regular de variables y símbolos terminales. Una gramática independiente del contexto generalizada representa una forma compacta de representar una gramática con todas las producciones $A \rightarrow \alpha$, donde $\alpha$ es una palabra del lenguaje asociado a la expresión regular $r$ y $A \rightarrow r$ es una producción de la gramática generalizada. Observemos que esta gramática asociada puede tener infinitas producciones, ya que una expresión regular puede representar un lenguaje con infinitas palabras. El concepto de lenguaje generado por una gramática generalizada se define de forma análaga al de las gramáticas independientes del contexto, pero teniendo en cuenta que ahora puede haber infinitas producciones. Demostrar que un lenguaje es
+independiente del contexto si y solo si se puede generar por una gramática generalizada. \\
+
+Llamaremos \textbf{producción clásica} a las producciones de la forma $A \rightarrow \alpha, \ \alpha \in (VUT)^*$ y \textbf{producción generalizada} a las producciones de la forma $A \rightarrow r$, donde $r$ es una expresión regular. \\
+
+Comencemos con la implicación hacia la derecha. Buscamos encontrar una gramática generaliza que genere $L$. Sean las producciones de $G$ de la forma:
+$$ A_1 \rightarrow \alpha_{11} \ | \ \alpha_{12} \ | \ ... \ | \ \alpha_{1n_1}$$
+$$ A_2 \rightarrow \alpha_{21} \ | \ \alpha_{22} \ | \ ... \ | \ \alpha_{2n_2}$$
+$$ ... $$
+$$ A_m \rightarrow \alpha_{m1} \ | \ \alpha_{m2} \ | \ ... \ | \ \alpha_{mn_m}$$
+
+Con $A_i \in V, \alpha_{ij}\in(VUT)^* \ \forall i,j$.
+
+Contruimos las siguientes expresiones regulares $r_i = \alpha_{i1} + \alpha_{i2} + ... + \alpha_{in_i} \ \forall i \in \{1, \ ... \ ,m\}$. \\
+
+Cada producción generalizada de la forma $A_i \rightarrow r_i$ representa todas las producciones clásicas de la gramática a partir de $A_i$. Por lo tanto, $\{A_i \rightarrow r_i : i \in \{1, \ ... \ ,m\}\}$ es el conjunto de producciones de una gramática generaliza que genera $L$. \\
+
+Resolvamos ahora la implicación hacia la izquierda. A partir de una gramática generalizada que genera $L$ obtendremos una gramática independiente del contexto, mostrando así que $L$ es independiente del contexto. \\ 
+
+Las producciones de la gramática generalizada serán de la forma:
+$A_i \rightarrow r_i : i \in \{1, \ ... \ ,n\}$. Veámos que podemos expresar cada una de estas reglas de producción generalizadas como un número finito de reglas de producción clásicas. Para ello utilizaremos el siguiente algoritmo. Sea $P$ el conjunto de producciones, inicialmente $P = \{A_i \rightarrow r_i : i \in \{1, \ ... \ ,n\}\}$, las producciones de la gramática. \\
+
+Tomaremos una producción de $P$, $A \rightarrow r$, y haremos lo siguiente:
+\begin{enumerate}
+
+\item Si la producción ya es una producción clásica, no la modificamos y tomamos otra producción distinta de $P$.
+
+\item Si la producción es de la forma $A \rightarrow r^*$, la eliminamos de $P$ y añadimos $A \rightarrow rA \ | \ \epsilon$.
+
+\item Si la producción es de la forma $A \rightarrow r^+$, la eliminamos y añadimos $A \rightarrow rB$ y $B \rightarrow rB \ | \ \epsilon$.
+
+\item Si la producción es de la forma $A \rightarrow r_1 + r_2$, la eliminamos y añadimos $A \rightarrow r_1 \ | \ r_2 $.
+
+\item Si la producción es de la forma $A \rightarrow \alpha r$, donde $\alpha \in (VUT)^*$ la eliminamos y añadimos $A \rightarrow aB$ y $B \rightarrow r $.
+
+\end{enumerate}
+
+De esta forma en cada paso o bien eliminamos un símbolo propio de expresión regular ($r^* \ , \ r^+ \ , \ r_1 + r_2$), o bien $r$ decrece en uno o más elementos si aplicamos el último paso. Como todas las expresiones regulares son finitas llega un momento en el que todas las producciones de $P$ son clásicas. \\
+
+Las producciones de $P$ componen una gramática libre del contexto que genera $L$, como buscábamos. \\
+
+\textbf{Ejercicio 17.} Demostrar que los siguientes lenguajes son independientes del contexto:
+
+\begin{enumerate}
+\item $L_1 = \{u\#w \ | \ u^{-1} \text{ es una subcadena de } w, \ u,w \in \{0, 1\}^* \}$
+\item $L_2 = \{u_1 \# u_2 \# ... \# u_k \ | \ k \geq 1, \text{ cada } u_i \in \{0, 1\}^* \text{, y para algún i y j }, u_i = u_j^{-1}\}$
+
+\end{enumerate}
+
+Para el primer lenguaje la gramática resulta ser relativamente sencilla. Recordemos que la cadena vacía es subcadena de todas las cadenas del lenguaje, de ahí la producción $A \rightarrow \#B$:
+
+$$ S \rightarrow SX \ | \ A $$
+$$ X \rightarrow 0 | 1 $$
+$$ A \rightarrow  0A0 \ | \ 1A1 \ | \ \#B $$
+$$ B \rightarrow XB $$
+
+Para el segundo lenguaje vale la pena remarcar un par de situaciones:
+
+\begin{itemize}
+\item Puede darse $u_i = \epsilon$ para cualquier $i$ pues $u_i \in \{0,1\}^*$. Esto está reflejado en la producción $X \rightarrow \epsilon$.
+\item Puede darse $u_i = u_j^{-1}$ para $i = j$ si $u_i$ es un palíndromo. De ahí la producción $A \rightarrow \epsilon$.
+
+\item Entre $u_i$ y $u_j$ puede no haber palabras ($A \rightarrow \#$) o haber un número indeterminado de palabras ($A \rightarrow \#C\#$).
+
+\end{itemize}
+
+Por último, la idea general del algoritmo es parecida al anterior: $S$ genera todas las $u_k$ antes de la palabra $u_i$; $X$ genera cada $u_k$ con $k \neq i,j$; A se encarga de generar $u_i$ y $u_j$; C genera las posibles palabras $u_k$ entre $u_i$ y $u_j$; y finalmente B genera las palabras $u_k$ que aparecen después de $u_j$.
+
+$$ S \rightarrow X\#S \ | \ AB $$
+$$ X \rightarrow 0X | 1X | \epsilon $$
+$$ A \rightarrow  0A0 \ | \ 1A1 \ | \ \epsilon \ | \ \# \ | \ \#C\# $$
+$$ C \rightarrow X\#C \ | \ X $$
+$$ B \rightarrow \#XB \ | \ \epsilon $$ \\
+
+\textbf{Ejercicio 19.} Sea el lenguaje $L = \{u\#v \ : \ u,v \in \{0, 1\}^* , u \neq v\}$ , demostrar que es independiente del contexto. \\
+
+Este leguanje \textbf{no} es independiente del contexto. Intuitivamente, necesitaríamos crear distintos elementos en dos puntos distintos de la palabra que no mantienen relación para saber si esta pertenece al lenguaje. Para mostrar que no lo es usaremos el lema de bombeo para lenguajes independientes del contexto. Enunciémoslo: \\
+
+Sea $L$ un lenguaje independiente del contexto. Entonces $\exists n \in N$ tal que $\forall x \in L, |x| \geq n$ existe una descomposición $ x = yzuvw$ cumpliendo:
+
+\begin{enumerate}
+\item $|zuv| \leq n$
+\item $|zv| > n$
+\item $\forall i \geq 0, \ yz^iuv^iw \in L$
+\end{enumerate}
+
+Negémoslo. Sea $L$ un lenguaje, si $\forall n \in N, \exists x \in L, |x| \geq n$ con una descomposición $x = yzuvw$ cumpliendo:
+
+\begin{enumerate}
+\item $|zuv| \leq n$
+\item $|zv| > n$
+\item Y sin embargo $\exists i \geq 0$ tal que $ yz^iuv^iw \notin L$
+\end{enumerate}
+
+Entonces $L$ no es independiente del contexto.\\
+
+En nuestro caso, sea $x = 0^n\#0^n$, $y = w = 0^n$, $z = \#$ y $u = v = \epsilon $. Obviamente $x = yzuvw$. Además, $|zuv| = 1 \leq n \ \forall n$, y $|zv| = 1 > 0$. \\
+
+Tomando $i = 2$, $ yz^iuv^iw = 0^n\#\#0^n \notin L$. Por tanto $L$ no es independiente del contexto. \\
+
+\textbf{Ejercicio 21.} Dar gramáticas independientes del contexto no ambiguas para los siguientes lenguajes sobre el alfabeto $\{0, 1\}$:
+
+\begin{itemize}
+\item El conjunto de palabras $w$ tal que en todo prefijo de $w$ el número de 0s es mayor o igual que el número de 1s.
+
+$$ S \rightarrow 0A \ | \ \epsilon $$
+$$ A \rightarrow 1S \ | \ 0AA \ | \ \epsilon $$
+
+\item El conjunto de palabras $w$ en las que el número de 0s es mayor o igual que el número de 1s.
+
+$$ S \rightarrow 0A \ | \ A0 \ | \ \epsilon \ | \ A0S0A $$
+$$ A \rightarrow 1 \ | \ A0A \ | \ \epsilon $$
+
+\end{itemize}
+
+En este caso las gramáticas son sencillas: cada $A$ te permite colocar como máximo un 1. El único detalle a destacar reside en la producción $A \rightarrow A0S0A$, ya que sin esta producción todas las palabras o bien comenzarían por 0, o bien terminarían por 0.
+
+
+
+
+\end{document}
