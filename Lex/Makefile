@@ -1,4 +1,4 @@
-PLANTILLA = plantilla_tutorial.l
+PLANTILLA = plantilla.l
 OUT = exe
 IN = entrada.txt
 
