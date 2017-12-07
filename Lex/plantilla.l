@@ -83,7 +83,7 @@ void makePlay (char * play, int play_length) {
     tam += 2;
 
   str = char [tam];
-  if (impar) {
+  if (num_plays % 2 == 1) {
     sprintf(str, "\\makeline{%d...%s}", num_plays/2, play);
   } else {
     sprintf(str, "\\makeline{%d.%s}", num_plays/2, play);

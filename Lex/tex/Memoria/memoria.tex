@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel} 
+\usepackage{url}
+\usepackage{skak}
+
+\begin{document}
+
+\section{Introdución}
+
+En esta memoria explicaremos como funciona la notación algebraica utilizada en el ajedrez e ilustraremos el uso del paquete \textbf{skak}. Se dan por sentados algunos conocimientos básicos de ajedrez.
+
+\section{Notación algebraica}
+
+Esta es la notación utilizada por convenio en todo el mundo desde 1997, aunque varía en el nombre que recibe cada pieza según el idioma. Estos son los símbolos utilizados para denotar las piezas en inglés y español:
+
+\begin{table}[h]
+	\centering
+	\caption{}
+	\label{my-label}
+	\begin{tabular}{lcc}
+		\textbf{}    & \multicolumn{1}{l}{Español} & \multicolumn{1}{l}{Ingles} \\
+		Peón         & P                           & P (Pawn)                   \\
+		Torre        & T                           & R (Rock)                   \\
+		Caballo      & C                           & N (K\textbf\{n\}ight)      \\
+		Álfil        & A                           & B (Bishop)                 \\
+		Dama / Reina & D                           & Q (Queen)                  \\
+		Rey          & K                           & K (King)                  
+	\end{tabular}
+\end{table}
+
+Esto tendrá especial repercusión de cara al paquete \textbf{skak}, que utiliza la notación en inglés.
+
+Siguiendo la notación algebraica, un movimiento se denota por la pieza que se mueve seguido de la casilla a la que se mueve. Así pues \textbf{Cc3} ó \textbf{Nc3} significa mover el caballo a la posición c3:
+
+\newgame
+\mainline{1.Nc3} \\
+\showboard
+
+Cuando se mueve un peón se omite el nombre de la pieza (P):
+
+\mainline{1...b5} \\
+\showboard
+
+Cuando se come una pieza en el movimiento se añade \textbf{x} entre la pieza y la casilla:
+
+\mainline{2.Nxb5} \\
+\showboard \\
+
+Es obvio que de esta forma se puede dar ambigüedad. Por ejemplo, en el siguiente tablero, ¿qué movimiento sería \textbf{xe5}? (le toca al blanco):
+
+\newgame
+\mainline{1.d4 e5 2.f4 Be7} \\
+\showboard
+
+Ambos peones pueden moverse a dicha posición. En estos casos se añade al principio del movimiento un símbolo adicional para distinguir que pieza se mueve. Si pueden identificarse por la columna, se añade la letra correspondiente a la columna. Si no es así, se utiliza la fila:
+
+\mainline{3.fxe5} \\
+\showboard
+
+Si en un movimiento se realiza da jaque se añade al final el símbolo $+$. De ser un jaque mate se añade o bien $++$ o bien $\#$:
+
+\mainline{3...Bh4+} \\
+\showboard \\
+
+Por último, el enroque corto se denota por \textbf{O-O} y el largo por \textbf{O-O-O}. A partir del siguiente tablero:
+
+\newgame
+\mainline{1. e3 d6 2. Bd3 Be6 3. Nf3 Nc6 4. h3 Qd7} \\
+\showboard
+
+Un enroque corto sería:
+
+\mainline{5. O-O} \\
+\showboard
+
+Y un enroque largo:
+
+\mainline{5...O-O-O} \\
+\showboard
+
+\section{Paquete skak}
+
+El uso es muy sencillo e intuitivo. La instalación ya es otro cantar. Para inicializar un tablero de 0 basta con hacer $\backslash newgame$ y cada movimiento sigue la notación algebraica explicada previamente (en inglés) con una pequeña salvedad: hay que indicar el número de jugada. De esta forma $\backslash mainline\{1.e4 e5\}$ Indicaría dos movimientos seguidos, uno por parte del jugador blanco y otro por aprte del negro. El siguiente movimiento tendrá que empezar \textbf{obligatoriamente} por \textbf{2}: $\backslash mainline\{2.b3\}$. La siguiente jugada, sin embargo, no es la 3 pues el jugador negro aún no ha movido dos piezas. Se denotaría por $\backslash mainline\{2...b6\}$. Por último, cada vez que queramos mostrar el tablero por pantalla utilizaremos $\backslash showboard$. Estos 4 movimientos se harían de la siguiente forma:
+
+\newgame
+\mainline{1.e4 e5} \\
+\showboard
+
+\mainline{2.b3} \\
+\showboard
+
+\mainline{2...b6} \\
+\showboard
+
+\section{Notas finales}
+
+Tengo que añadir todavía al trabajo que si se detecta un eroque escrito con ceros, lo renombre con letras O. Además, ahora mismo sólo procesaría juegos en inglés, también me gustaría cambiar eso.  \\
+
+Para hacer pruebecillas sobre la notación: \url{https://www.chess.com/analysis-board-editor} \\ Te aparece a la derecha los movimientos que vas realizando en notación algebraica, es muy cómodo. \\
+
+\end{document}
