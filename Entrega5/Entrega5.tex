@@ -16,7 +16,7 @@
 \usepackage{float}
 
 % Meta
-\title{Entrega 3}
+\title{Entrega 5}
 \author{José Antonio Álvarez}
 \date{\today}
 
@@ -38,11 +38,11 @@
 
 $$ L = \{ucv : u, v \in \{0, 1\} \text{ y nº de subcadenas } 01 \text{ en } u \text{ es igual al nº de subcadenas } 10 \text{ en } v\} $$
 
-Comprueba con el algoritmo \textbf{CYK} si la cadena \emph{010c101} pertenece al lenguaje generado por la gramática.
+Comprueba con el algoritmo \textbf{CYK} si la cadena \emph{010c101} pertenece al lenguaje generado por la gramática. \\
 
 \begin {enumerate} 
 
-\item Gramática libre del contexto que general el lenguaje:
+\item Gramática libre del contexto que genera el lenguaje:
 	
 $$ S \rightarrow S_1AS_1 | S_1BS_0 | S_0CS_1 | S_0DS_0 | YXY $$
 $$ Y \rightarrow S_1 | S_0 | \epsilon $$
@@ -83,24 +83,25 @@ $$ X_2 \rightarrow S_1S_0$$
 	\caption{\textbf{CYK} - ejercicio 13}
 	\label{my-label}
 	\begin{tabular}{lllllll}
-		0                          & 1                                  & 0                                                                                        & c                                                                                     & 0                         & 1                         & 0                         \\ \hline
-		\multicolumn{1}{|l|}{S\_0} & \multicolumn{1}{l|}{S\_1}          & \multicolumn{1}{l|}{S\_0}                                                                & \multicolumn{1}{l|}{A, B, C, D}                                                       & \multicolumn{1}{l|}{S\_0} & \multicolumn{1}{l|}{S\_1} & \multicolumn{1}{l|}{S\_0} \\ \hline
-		\multicolumn{1}{|l|}{}     & \multicolumn{1}{l|}{X\_2}          & \multicolumn{1}{l|}{A, B, C, D}                                                          & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}A, B, C, D, \\ E\_2,E\_3\end{tabular}} & \multicolumn{1}{l|}{}     & \multicolumn{1}{l|}{X\_2} &                           \\ \cline{1-6}
-		\multicolumn{1}{|l|}{}     & \multicolumn{1}{l|}{A, B}          & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}S, A, B, C,\\ D, E\_2, E\_3\end{tabular}} & \multicolumn{1}{l|}{A, C, E\_, E\_3}                                                  & \multicolumn{1}{l|}{}     &                           &                           \\ \cline{1-5}
-		\multicolumn{1}{|l|}{}     & \multicolumn{1}{l|}{S, A, B, E\_2} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}S, A, C, E\_2,\\ E\_3\end{tabular}}       & \multicolumn{1}{l|}{X\_1}                                                             &                           &                           &                           \\ \cline{1-4}
-		\multicolumn{1}{|l|}{}     & \multicolumn{1}{l|}{S, A}          & \multicolumn{1}{l|}{X\_1}                                                                &                                                                                       &                           &                           &                           \\ \cline{1-3}
-		\multicolumn{1}{|l|}{}     & \multicolumn{1}{l|}{X\_0, X\_1}    &                                                                                          &                                                                                       &                           &                           &                           \\ \cline{1-2}
-		\multicolumn{1}{|l|}{S}    &                                    &                                                                                          &                                                                                       &                           &                           &                           \\ \cline{1-1}
+		0                           & 1                                & 0                                        & c                                      & 0                          & 1                          & 0                          \\ \hline
+		\multicolumn{1}{|l|}{$S_0$} & \multicolumn{1}{l|}{$S_1$}       & \multicolumn{1}{l|}{$S_0$}               & \multicolumn{1}{l|}{$A,B,C,D$}         & \multicolumn{1}{l|}{$S_0$} & \multicolumn{1}{l|}{$S_1$} & \multicolumn{1}{l|}{$S_0$} \\ \hline
+		\multicolumn{1}{|l|}{}      & \multicolumn{1}{l|}{$X_2$}       & \multicolumn{1}{l|}{$A,B,C,D$}           & \multicolumn{1}{l|}{$A,B,C,D,E_2,E_3$} & \multicolumn{1}{l|}{}      & \multicolumn{1}{l|}{$X_2$} &                            \\ \cline{1-6}
+		\multicolumn{1}{|l|}{}      & \multicolumn{1}{l|}{$A,B$}       & \multicolumn{1}{l|}{$S,A,B,C,D,E_2,E_3$} & \multicolumn{1}{l|}{$A,C,E_2,E_3$}     & \multicolumn{1}{l|}{}      &                            &                            \\ \cline{1-5}
+		\multicolumn{1}{|l|}{}      & \multicolumn{1}{l|}{$S,A,B,E_2$} & \multicolumn{1}{l|}{$S,A,C,E_2,E_3$}     & \multicolumn{1}{l|}{$X_1$}             &                            &                            &                            \\ \cline{1-4}
+		\multicolumn{1}{|l|}{}      & \multicolumn{1}{l|}{$S,A$}       & \multicolumn{1}{l|}{$X_1$}               &                                        &                            &                            &                            \\ \cline{1-3}
+		\multicolumn{1}{|l|}{}      & \multicolumn{1}{l|}{$X_0,X_1$}   &                                          &                                        &                            &                            &                            \\ \cline{1-2}
+		\multicolumn{1}{|l|}{$S$}   &                                  &                                          &                                        &                            &                            &                            \\ \cline{1-1}
 	\end{tabular}
 \end{table}
 
 \end{enumerate}
 
+
 \textbf{Ejercicio 15.} Encuentra una gramática libre de contexto en forma normal de Chomsky que genere los
 siguientes lenguaje definidos sobre el alfabeto $\{a, 0, 1\}$ :
 $$L_1 = \{auava : u,v \in \{0, 1\}^+ \text { y } u^{-1} = v\} $$
 $$L_2 = \{uvu : u,v \in \{0, 1\}^+ \text{ y } u^{-1} = v\} $$
-Comprueba con el algoritmo \textbf{CYK} si la cadena \emph{a0a0a} pertenece a $L_1$ y la cadena \emph{011001} pertenece al lenguaje $L_2$ .
+Comprueba con el algoritmo \textbf{CYK} si la cadena \emph{a0a0a} pertenece a $L_1$ y la cadena \emph{011001} pertenece al lenguaje $L_2$ . \\
 
 \begin{enumerate}
 	\item Gramática libre del contexto que genera $L_1$:
@@ -125,12 +126,12 @@ Comprueba con el algoritmo \textbf{CYK} si la cadena \emph{a0a0a} pertenece a $L
 		\caption{\textbf{CYK} - ejercicio 15}
 		\label{my-label}
 		\begin{tabular}{lllll}
-			a                          & 0                         & a                         & 0                      & a                         \\ \hline
-			\multicolumn{1}{|l|}{A, B} & \multicolumn{1}{l|}{X}    & \multicolumn{1}{l|}{A, B} & \multicolumn{1}{l|}{X} & \multicolumn{1}{l|}{A, B} \\ \hline
-			\multicolumn{1}{|l|}{E\_2} & \multicolumn{1}{l|}{}     & \multicolumn{1}{l|}{E\_2} & \multicolumn{1}{l|}{}  &                           \\ \cline{1-4}
-			\multicolumn{1}{|l|}{}     & \multicolumn{1}{l|}{B}    & \multicolumn{1}{l|}{}     &                        &                           \\ \cline{1-3}
-			\multicolumn{1}{|l|}{}     & \multicolumn{1}{l|}{E\_1} &                           &                        &                           \\ \cline{1-2}
-			\multicolumn{1}{|l|}{S}    &                           &                           &                        &                           \\ \cline{1-1}
+			a                            & 0                          & a                           & 0                        & a                           \\ \hline
+			\multicolumn{1}{|l|}{$A, B$} & \multicolumn{1}{l|}{$X$}   & \multicolumn{1}{l|}{$A, B$} & \multicolumn{1}{l|}{$X$} & \multicolumn{1}{l|}{$A, B$} \\ \hline
+			\multicolumn{1}{|l|}{$E_2$}  & \multicolumn{1}{l|}{}      & \multicolumn{1}{l|}{$E_2$}  & \multicolumn{1}{l|}{}    &                             \\ \cline{1-4}
+			\multicolumn{1}{|l|}{}       & \multicolumn{1}{l|}{$B$}   & \multicolumn{1}{l|}{}       &                          &                             \\ \cline{1-3}
+			\multicolumn{1}{|l|}{}       & \multicolumn{1}{l|}{$E_1$} &                             &                          &                             \\ \cline{1-2}
+			\multicolumn{1}{|l|}{$S$}    &                            &                             &                          &                             \\ \cline{1-1}
 		\end{tabular}
 	\end{table}
 	
@@ -148,8 +149,54 @@ Comprueba con el algoritmo \textbf{CYK} si la cadena \emph{a0a0a} pertenece a $L
 		\item Finalmente, si $x$ unicamente toma elementos de $u_2$, al bombear no se cumple ni que $v = u_1$ ni que $u_1 = u_2$.
 	\end{enumerate}
 	
-	Por tanto el lenguaje no es libre del contexto. Es obvio entonces que no podemos encontrar una gramática en forma normal de Chomsky que lo genere. Como el algoritmo \textbf{CYK} unicamente se aplica a gramáticas de esta forma, no puedo aplicarlo. Aún así es obvio que la cadena \emph{011001} pertenece al lenguaje (de hecho es $f$ para $n = 1$).	 
+	Por tanto el lenguaje no es libre del contexto. Es obvio entonces que no podemos encontrar una gramática en forma normal de Chomsky que lo genere. Como el algoritmo \textbf{CYK} unicamente se aplica a gramáticas de esta forma, no puedo aplicarlo. Aún así es obvio que la cadena \emph{011001} pertenece al lenguaje (de hecho es $f$ para $n = 1$). \\
 \end{enumerate}
+
+
+\textbf{Ejercicio 21.} Si $L_1$ y $L_2$ son lenguajes sobre el alfabeto $A$, entonces se define el cociente: $$L_1/L_2 = \{u \in A^* : \exists w \in L_2 \text { tal que } uw \in L_1 \}$$ Demostrar que si $L_1$ es independiente del contexto y $L_2$ regular, entonces $L_1/L_2$ es independiente del contexto. \\
+
+Para probar que $L_1/L_2$ es independiente del contexto encontraremos $A_3$, un autómata con pila por el criterio de estados finales que lo genere. Sea $A_1 = (Q_1, A, B, \delta_1, q_0^1, Z_0, F_1)$ un autómata con pila por el criterio de estamos finales que acepta $L_1$ y $A_2 = (Q_2, A. \delta_2, q_0^2, F_2)$ un autómata determinista que acepta $L_2$, entonces:
+
+$$ A_3 = (Q_1 \times Q_2, A, B, \delta_3, (q_0^3 = (q_0^1, q_0^2)), Z_0, F_3) $$
+
+Definamos ahora el conjunto $F_3$ y la función de transición $\delta_3$:
+
+$$ (q_i, q_j) \in F_3 \leftrightarrow q_i \in F_1 \text{ y } q_j \in F_2 $$
+
+Si $L_2 \neq \{0,1\}^*$ existirá un estado $q_x \in Q_2$ a partir del cual no se puede alcanzar ningún estado final. Llamaremos a este estado el estado de error. Sea $a\in A$, $X \in B$ y $C = B^*\cup \{\epsilon\}$. Se define la función de transición como:
+
+$$ \delta_3^* ((q_i, q_0), X, a) = \{(q_k, q_0) : (q_k, Y) \in \delta_1(q_i, X, a), Y \in C \} $$
+
+$$ \delta_3^* ((q_i, q_j), X, \epsilon) = \{(q_k, q_z) : \exists b \in A \text { tal que }  (q_k, Y) \in \delta_1^*(q_i, X, b), Y \in C, q_z \in \delta_2^* (q_j, b), q_z \neq q_x \} $$
+
+La idea intuitiva reside en recorrer los dos autómatas al mismo tiempo. En primer lugar consumiremos la palabra $u$ moviéndonos unicamente por el autómata $A_1$. Cuando lleguemos a dicho estado, para comprobar si es posible leer una palabra de $L_2$ llegando a un estado final de $A_1$ utilizamos las transiciones del segundo tipo, donde consumimos una cadena vacía y avanzamos de igual foma por $A_1$ que por $A_2$. \\
+
+Como $A_3$ acepta $L_1/L_2$, es independiente del contexto. \\
+
+\textbf{Ejercicio 22.} Si $L$ es un lenguaje sobre $\{0, 1\}$, sea $SUF(L)$ el conjunto de los sufijos de palabras de $L$ :
+$$SUF(L) = \{u \in \{0, 1\}^* : \exists v \in \{0, 1\}^* , \text{ tal que } vu \in L \} $$ Demostrar que si $L$ es independiente del contexto, entonces $SUF(L)$ también es independiente del contexto. \\
+
+Aunque podría utilizar la misma solución que en el ejercicio anterior cambiando un par de detalles en la definición del autómata lo resolveré de otra forma más interesante.
+
+Sea $L$ un lenguaje sobre un alfabeto $A$. Defino el \emph{lenguaje inverso de} $L$ como:
+
+$$ INV(L) = \{u \in A : u^{-1} \in L \}$$
+
+Veamos que si $L$ es independiente del contexto, $INV(L)$ también lo es. Utilizando la misma idea que al pasar de un autómata con pila a una gramática independiente del contexto con una ligera variación, a partir de las transiciones de la forma:
+
+$$ \delta(q_i, X_0, a) = (q_j, X_1X_2...X_N) $$
+
+Obtenemos producciones de la forma:
+
+$$[q_j, X_0, q_i] \rightarrow a[q_j, X_1, p_1][p_1, X_2, p_2]...[p_{N-2}, X_{N-1},p_{N-1}][p_{N-1},X_N,q_i], p_i \in Q, \forall i \in \{1,...,N-1\}$$
+
+Intuitivamente, invirtiendo el autómata como haríamos en lenguajes regulares. Hemos obtenido una gramática que genera $INV(L)$ a partir de un automáta que genera $L$. Por lo tanto $INV(L)$ es independiente del contexto si y solo si $L$ lo es. \\
+
+Es sencillo darse cuenta, utilizando la definición del ejercicio anterior de que $L/\{0,1\}^* = PREF(L)$ es el conjunto de los prefijos de las palabras de $L$, definido análogamente al de los sufijos. También es sencillo comprobar que $INV ( SUF (L) ) = PREF (L)$. \\
+
+Sabemos por el ejercicio anterior que $PREF(L)$ es independiente del contexto. Como es el inverso de $SUF(L)$, $SUF(L)$ también es independiente del contexto.
+
+
 
 
 \end{document}
