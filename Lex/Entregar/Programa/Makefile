@@ -1,4 +1,4 @@
-PLANTILLA = plantilla.l
+PROYECTO = practica.l
 OUT = exe
 IN = entrada.txt
 
@@ -11,11 +11,12 @@ ejecucion: $(OUT)
 # Limpieza
 clean:
 	rm exe
+	rm lex.yy.c
 
 # ************ Compilación ************
 # Invocamos la herramienta Lex
 lex.yy.c:
-	lex $(PLANTILLA)
+	lex $(PROYECTO)
 
 # Compilamos el lex.yy.c
 $(OUT): lex.yy.c

@@ -4,19 +4,32 @@
 \usepackage{url}
 \usepackage{skak}
 
+% Meta
+\title{Práctica de Lex: Notación algebraica}
+\author{José Antonio Álvarez}
+\date{\today}
+
 \begin{document}
+
+\maketitle
 
 \section{Introdución}
 
-En esta memoria explicaremos como funciona la notación algebraica utilizada en el ajedrez e ilustraremos el uso del paquete \textbf{skak}. Se dan por sentados algunos conocimientos básicos de ajedrez.
+En esta memoria explicaremos el problema planteado asi como diversas herramientas relacionadas con el mismo como són el funcionamiento de la notación algebraica utilizada en el ajedrez y el uso del paquete \textbf{skak}. Se darán por sentados algunos conocimientos básicos de ajedrez.
 
-\section{Notación algebraica}
+\section{El problema}
+
+Para los aficionados al ajedrez que no están muy versados en el tema (como personalmente me considero) la notación utilizado por los ajedrecistas puede ser algo confusa. El objetivo de este trabajo es tanto acercar dicha notación a este tipo de público mediante el uso de ejemplos ilustrativos como presentar una herramienta sencilla para transformar partidas descrita en esta notación a archivos del tipo \emph{.tex}. \\
+
+Debido a lo complicado que resulta la instalación del paquete \textbf{skak} que he utilizado, adjunto una serie de ejemplos de uso del programa para que no sea necesario instalarlo. He seleccionado este paquete a pesar de dicha complicación por la facilidad que presenta a la hora de utilizarlo.
+
+\section{La notación algebraica}
 
 Esta es la notación utilizada por convenio en todo el mundo desde 1997, aunque varía en el nombre que recibe cada pieza según el idioma. Estos son los símbolos utilizados para denotar las piezas en inglés y español:
 
 \begin{table}[h]
 	\centering
-	\caption{}
+	\caption{Piezas en notación algebraica}
 	\label{my-label}
 	\begin{tabular}{lcc}
 		\textbf{}    & \multicolumn{1}{l}{Español} & \multicolumn{1}{l}{Ingles} \\
@@ -79,6 +92,8 @@ Y un enroque largo:
 \mainline{5...O-O-O} \\
 \showboard
 
+Hay además una serie de signos para realizas comentarios sobre jugadas específicas, como son \textbf{!} (jugada buena), \textbf{?} (jugada mala) y \textbf{!?} (jugada interesante). No he tenido en cuenta estos símbolos en mi trabajo. Para más información consultar \url{https://es.wikipedia.org/wiki/Notaci%C3%B3n_algebraica}.
+
 \section{Paquete skak}
 
 El uso es muy sencillo e intuitivo. La instalación ya es otro cantar. Para inicializar un tablero de 0 basta con hacer $\backslash newgame$ y cada movimiento sigue la notación algebraica explicada previamente (en inglés) con una pequeña salvedad: hay que indicar el número de jugada. De esta forma $\backslash mainline\{1.e4 e5\}$ Indicaría dos movimientos seguidos, uno por parte del jugador blanco y otro por aprte del negro. El siguiente movimiento tendrá que empezar \textbf{obligatoriamente} por \textbf{2}: $\backslash mainline\{2.b3\}$. La siguiente jugada, sin embargo, no es la 3 pues el jugador negro aún no ha movido dos piezas. Se denotaría por $\backslash mainline\{2...b6\}$. Por último, cada vez que queramos mostrar el tablero por pantalla utilizaremos $\backslash showboard$. Estos 4 movimientos se harían de la siguiente forma:
@@ -93,10 +108,33 @@ El uso es muy sencillo e intuitivo. La instalación ya es otro cantar. Para inic
 \mainline{2...b6} \\
 \showboard
 
-\section{Notas finales}
+\section{Ejemplos ilustrativos}
 
-Tengo que añadir todavía al trabajo que si se detecta un eroque escrito con ceros, lo renombre con letras O. Además, ahora mismo sólo procesaría juegos en inglés, también me gustaría cambiar eso.  \\
+En primer lugar, para probar sobre la notación algebraica de forma cómoda aconsejo la siguiente página: \url{https://www.chess.com/analysis-board-editor} \\ Conforme realizamos movimientos en el tablero de forma gráfica se actualizarán a la derecha los dichos movimientos en notación algebraica. \\
 
-Para hacer pruebecillas sobre la notación: \url{https://www.chess.com/analysis-board-editor} \\ Te aparece a la derecha los movimientos que vas realizando en notación algebraica, es muy cómodo. \\
+Respecto a los ejemplos adjuntos, esta misma memoria es una sencilla introducción al uso del paquete \textbf{skak}, así como el llamado \textbf{Defensa Siliciana}. Este último está hecho a mano.
 
+Por último, adjunto 3 ejemplos de uso del programa. He de aclarar que aunque no se tenga el paquete \textbf{skak} instalado si que se puede generar el archivo \emph{.tex}. 
+
+\begin{enumerate}
+	\item El primer ejemplo es la denominada Partida Inmortal (\url{https://es.wikipedia.org/wiki/Inmortal_(partida_de_ajedrez)}).
+	
+	\item El segundo ejemplo es la denominada Partida Siempreviva (\url{https://es.wikipedia.org/wiki/Siempreviva_(partida_de_ajedrez)})
+	
+	\item El tercer ejemplo es la denominada Partida Inmortal de Mackenzie-Mason ( \url{http://www.ajedrezdeataque.com/12%20Visor/Visor1/Mackenzie-Mason.htm})
+\end{enumerate}
+
+
+\section{Bibliografia}
+
+Documentación sobre el paquete \textbf{skak}: \\
+\url{https://es.sharelatex.com/learn/Chess_notation} \\
+
+Notación algebraica: \\
+\url{https://es.wikipedia.org/wiki/Notaci%C3%B3n_algebraica} \\
+
+Ejemplos: \\
+\url{https://es.wikipedia.org/wiki/Inmortal_(partida_de_ajedrez)} \\
+\url{https://es.wikipedia.org/wiki/Siempreviva_(partida_de_ajedrez)} \\
+\url{http://www.ajedrezdeataque.com/12%20Visor/Visor1/Mackenzie-Mason.htm} \\
 \end{document}

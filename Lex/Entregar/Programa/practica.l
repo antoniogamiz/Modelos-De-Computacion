@@ -1,11 +1,11 @@
   /*----- Sección de Declaraciones --------------*/
 
-pieza         [RDTCA]?
+pieza         [RNBKQ]
 fila          [1-8]
 columna       [a-h]
-posicion      {fila}{columna}
+posicion      {columna}{fila}
 enroque       (O\-O(\-O)?)|(0\-0(\-0)?)
-movimiento    {enroque}|({pieza}({fila}|{columna})?x?{posicion})
+movimiento    {enroque}|({pieza}?({fila}|{columna})?x?{posicion})
 jaque         {movimiento}\+
 jaquemate     {movimiento}(\+\+|#)
 jugada        {movimiento}|{jaque}|{jaquemate}
@@ -15,7 +15,7 @@ jugada        {movimiento}|{jaque}|{jaquemate}
 //#include <cstdio>
 
 int num_plays;
-char * salida = "tex/salida.txt";
+char * salida = "out/salida.tex";
 FILE * Fsalida;
 
 void makeHeader ();
@@ -61,35 +61,38 @@ int main (int argc, char *argv[]) {
 
   // Cerramos el archivo de salida
   fclose (Fsalida);
-
   return 0;
 }
 
 void makeHeader () {
-  fputs ("\\documentclass{article}", Fsalida);
-  fputs ("\\usepackage[utf8]{inputenc}", Fsalida);
-  fputs ("\\usepackage[english]{babel}", Fsalida);
-  fputs ("\\usepackage{skak}", Fsalida);
-  fputs ("\\begin{document}", Fsalida);
-  fputs ("\\newgame", Fsalida);
+  fputs ("\\documentclass{article}\n", Fsalida);
+  fputs ("\\usepackage[utf8]{inputenc}\n", Fsalida);
+  fputs ("\\usepackage[english]{babel}\n", Fsalida);
+  fputs ("\\usepackage{skak}\n", Fsalida);
+  fputs ("\n\\begin{document}\n", Fsalida);
+  fputs ("\\newgame\n\n", Fsalida);
+  fputs ("\\showboard \\\\\n", Fsalida);
+
 }
 
 void makePlay (char * play, int play_length) {
   char * str;
-  // size("\makeline{n.}") == 13
-  int tam = 13 + play_length;
-  bool impar = num_plays % 2 == 1;
-  if (impar)
+  // size("\mainline{n.} \\\\\n") == 20
+  int tam = 15 + play_length;
+  if (num_plays % 2 == 1)
     tam += 2;
 
-  str = char [tam];
-  if (num_plays % 2 == 1) {
-    sprintf(str, "\\makeline{%d...%s}", num_plays/2, play);
+  str = (char *) malloc (tam);
+  if ( num_plays % 2 ==  1) {
+    sprintf(str, "\\mainline{%d...%s} \\\\\n", num_plays/2, play);
   } else {
-    sprintf(str, "\\makeline{%d.%s}", num_plays/2, play);
+    sprintf(str, "\\mainline{%d.%s} \\\\\n", num_plays/2, play);
   }
   fputs (str, Fsalida);
+  fputs ("\\showboard \\\\\n", Fsalida);
   num_plays++;
+
+  free (str);
 }
 
 void makeEnding() {
